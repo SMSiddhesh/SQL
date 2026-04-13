@@ -1,0 +1,127 @@
+Aggregate Functions + GROUP BY 
+Aggregate Functions + GROUP BY is used in almost every real job
+---
+🧠 1. Aggregate Functions (Summary Operations)
+👉 These functions calculate values from multiple rows
+---
+🔹 Main Aggregate Functions
+Function	Meaning
+COUNT()	Number of rows
+SUM()	            Total
+AVG()	            Average
+MAX()	            Highest value
+MIN()	            Lowest value
+---
+🔹 Example Table: students
+id	name	age	marks
+1	Rahul	22	80
+2	Amit	19	70
+3	Neha	21	90
+4	Ravi	22	60
+---
+🔹 COUNT()
+SELECT COUNT(*) FROM students;
+👉 Output: 4 students
+---
+🔹 SUM()
+SELECT SUM(marks) FROM students;
+---
+🔹 AVG()
+SELECT AVG(marks) FROM students;
+---
+🔹 MAX / MIN
+SELECT MAX(marks), MIN(marks) FROM students;
+---
+⚠️ Important Rule
+👉 Aggregate functions return single value (summary)
+---
+
+ 2. GROUP BY (Grouping Data)
+👉 GROUP BY = Group similar rows and apply aggregate
+---
+🔹 Basic Syntax
+SELECT column, AGG_FUNCTION(column)
+FROM table
+GROUP BY column;
+---
+🔹 Example: Group by Age
+SELECT age, COUNT(*) 
+FROM students
+GROUP BY age;
+
+👉 Output:
+age	count
+19	1
+21	1
+22	2
+
+---
+🔹 Average Marks per Age
+SELECT age, AVG(marks)
+FROM students
+GROUP BY age;
+---
+🔥 Real-Life Example
+👉 Company wants:
+Number of employees per department
+
+SELECT department, COUNT(*) 
+FROM employees
+GROUP BY department;
+---
+⚠️ Common Mistake (VERY IMPORTANT)
+❌ Wrong:
+SELECT name, COUNT(*) FROM students;
+👉 ERROR (because name is not grouped)
+---
+✅ Correct:
+SELECT age, COUNT(*) FROM students
+GROUP BY age;
+---
+🔥 GROUP BY + HAVING (Important Combo)
+👉 HAVING = filter groups (after grouping)
+---
+🔹 Example: Age having more than 1 student
+SELECT age, COUNT(*) 
+FROM students
+GROUP BY age
+HAVING COUNT(*) > 1;
+
+👉 Output:
+age	count
+22	2
+---
+🧠 WHERE vs HAVING
+Feature   	WHERE	             HAVING
+Use       	Before grouping	  After grouping
+Works on	  Rows	            Groups
+---
+🔹 Example
+SELECT age, COUNT(*)
+FROM students
+WHERE marks > 60
+GROUP BY age
+HAVING COUNT(*) > 1;
+---
+🎯 Real Interview Questions
+1. Find total salary per department
+2. Find average marks per class
+3. Find departments with more than 5 employees
+4. Find highest salary per department
+---
+🧪 Practice Questions
+Try yourself:
+1. Count students by age
+2. Find average marks per age
+3. Find max marks per age
+4. Show ages with more than 1 student
+5. Count students with marks > 70 (grouped by age)
+---
+💡 Final Understanding
+Aggregate → gives summary
+GROUP BY → divides into groups
+HAVING → filters groups
+---
+🚀 Pro Tip (Very Important)
+👉 Always remember order:
+SELECT → FROM → WHERE → GROUP BY → HAVING → ORDER BY
