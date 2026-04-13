@@ -1,0 +1,172 @@
+🧠 1. SQL Basics (Super Simple)
+Think of a database like an Excel file 📊
+Database → Whole file
+Table → Sheet inside file
+Row → One record (one person)
+Column → One field (name, age, etc.)
+
+👉 Example table: students
+id	name	age
+1	Rahul	22
+2	Amit	19
+3	Neha	21
+
+---
+🔑 Important Terms
+Primary Key → Unique ID (no duplicate)
+Column Types:
+INT → numbers
+VARCHAR → text
+DATE → date
+
+---
+🏗️ Create Table Example
+CREATE TABLE students (
+  id INT PRIMARY KEY,
+  name VARCHAR(50),
+  age INT
+);
+
+---
+🔍 2. SELECT (Data Read Command)
+👉 SELECT = “Show me data”
+
+---
+🔹 Get All Data
+SELECT * FROM students;
+👉 Output:
+id	name	age
+1	Rahul	22
+2	Amit	19
+3	Neha	21
+
+---
+🔹 Get Specific Columns
+SELECT name, age FROM students;
+👉 Output:
+name	age
+Rahul	22
+Amit	19
+Neha	21
+
+---
+🔹 Rename Column (Alias)
+SELECT name AS student_name FROM students;
+
+---
+🔹 Remove Duplicates
+SELECT DISTINCT age FROM students;
+
+---
+⚡ 3. WHERE (Filter Data)
+👉 WHERE = “Give me only matching data”
+
+---
+🔹 Basic Condition
+SELECT * FROM students WHERE age > 20;
+👉 Output:
+id	name	age
+1	Rahul	22
+3	Neha	21
+
+---
+🔹 Equal Condition
+SELECT * FROM students WHERE name = 'Amit';
+
+---
+🔹 Multiple Conditions
+AND (both true)
+
+SELECT * FROM students 
+WHERE age > 20 AND name = 'Rahul';
+
+---
+OR (any one true)
+
+SELECT * FROM students 
+WHERE age < 20 OR name = 'Neha';
+
+---
+NOT (reverse)
+
+SELECT * FROM students 
+WHERE NOT age = 22;
+
+---
+🔢 4. Comparison Operators
+Operator	Meaning
+=	equal
+>	greater
+<	less
+>=	greater or equal
+<=	less or equal
+!=	not equal
+
+---
+🔍 5. Special WHERE Conditions
+🔹 BETWEEN (range)
+SELECT * FROM students 
+WHERE age BETWEEN 20 AND 25;
+
+---
+🔹 IN (multiple values)
+SELECT * FROM students 
+WHERE name IN ('Rahul', 'Neha');
+
+---
+🔹 LIKE (pattern search)
+SELECT * FROM students 
+WHERE name LIKE 'R%';
+
+👉 Meaning:
+R% → starts with R
+%a → ends with a
+%h% → contains h
+
+---
+🔹 IS NULL
+SELECT * FROM students 
+WHERE age IS NULL;
+
+---
+🧠 Real-Life Example
+👉 Imagine: You have 1 lakh users in database
+You want:
+
+Only users age > 25
+Name starts with "A"
+
+SELECT * FROM users
+WHERE age > 25 AND name LIKE 'A%';
+
+---
+🎯 Common Mistakes (Important ⚠️)
+❌ Wrong:
+WHERE name = Rahul
+✅ Correct:
+WHERE name = 'Rahul'
+---
+❌ Wrong:
+WHERE age = '22'
+✅ Better:
+WHERE age = 22
+---
+🚀 Practice Tasks
+Try these yourself:
+1. Get all students
+2. Get only names
+3. Find students age > 20
+4. Find student named "Neha"
+5. Find students age between 18 and 22
+6. Find names starting with "A"
+
+---
+💡 Final Understanding
+SELECT → What data you want
+FROM → From which table
+WHERE → Filter condition
+
+👉 Together:
+SELECT column_name 
+FROM table_name
+WHERE condition;
