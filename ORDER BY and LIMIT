@@ -1,0 +1,135 @@
+ORDER BY + LIMIT
+1. ORDER BY (Sorting Data)
+👉 ORDER BY = Arrange data (like sorting in Excel)
+🔹 Basic Syntax
+SELECT column_name
+FROM table_name
+ORDER BY column_name;
+---
+🔹 Example Table: students
+id	name	age
+1	Rahul	22
+2	Amit	19
+3	Neha	21
+
+🔹 Sort by Age (Ascending - Default)
+SELECT * FROM students
+ORDER BY age;
+👉 Output:
+id	name	age
+2	Amit	19
+3	Neha	21
+1	Rahul	22
+
+---
+🔹 Sort Descending (Highest First)
+SELECT * FROM students
+ORDER BY age DESC;
+👉 Output:
+id	name	age
+1	Rahul	22
+3	Neha	21
+2	Amit	19
+
+---
+🔹 Sort by Name (Alphabetical)
+SELECT * FROM students
+ORDER BY name ASC;
+
+---
+🔹 Sort by Multiple Columns
+SELECT * FROM students
+ORDER BY age ASC, name DESC;
+
+👉 Meaning:
+First sort by age
+If same age → sort by name
+
+---
+🎯 Real-Life Use
+Sort employees by salary
+Sort products by price
+Sort students by marks
+
+---
+⛔ Common Mistake
+❌ Wrong:
+ORDER age BY
+✅ Correct:
+ORDER BY age
+---
+
+2. LIMIT (Control Number of Rows)
+👉 LIMIT = “Give me only few rows”
+---
+🔹 Basic Syntax
+SELECT * FROM table_name
+LIMIT number;
+---
+🔹 Example
+SELECT * FROM students
+LIMIT 2;
+👉 Output (only first 2 rows):
+id	name	age
+1	Rahul	22
+2	Amit	19
+
+---
+🔥 ORDER BY + LIMIT (Most Important 🔥🔥)
+👉 Used together in real jobs
+---
+🔹 Top 2 Oldest Students
+SELECT * FROM students
+ORDER BY age DESC
+LIMIT 2;
+---
+🔹 Youngest Student
+SELECT * FROM students
+ORDER BY age ASC
+LIMIT 1;
+---
+🔹 Top 3 Highest Salaries (Real Example)
+SELECT * FROM employees
+ORDER BY salary DESC
+LIMIT 3;
+---
+📄 OFFSET (Bonus)
+👉 Skip rows
+SELECT * FROM students
+LIMIT 2 OFFSET 1;
+👉 Meaning:
+Skip 1 row
+Show next 2 rows
+---
+🧠 Real Scenario
+👉 You want:
+Latest 5 users
+Highest 10 salaries
+Top 3 scorers
+
+👉 Always use:
+ORDER BY + LIMIT
+---
+🎯 Practice Questions
+1. Get all students sorted by age
+2. Get top 2 youngest students
+3. Get oldest student
+4. Get top 3 names in alphabetical order
+5. Skip first 2 and show next 3
+---
+💡 Final Summary
+ORDER BY → Sort data
+LIMIT → Restrict number of rows
+Together → 🔥 Very powerful
+---
+🚀 Pro Tip
+Always use ORDER BY with LIMIT
+❌ Wrong:
+SELECT * FROM students LIMIT 5;
+👉 Random result
+✅ Correct:
+SELECT * FROM students
+ORDER BY id DESC
+LIMIT 5;
+
+
