@@ -1,0 +1,135 @@
+Normalization
+🧠 What is Normalization?
+👉 Normalization = remove duplicate data + organize tables
+Goal:
+No data repetition
+Better structure
+Easy updates
+
+🧠 Simple Example (Before Normalization ❌)
+Table: students
+id	name	course	 instructor
+1	Rahul	AWS	 John
+2	Amit	Linux	 Mike
+3	Neha	AWS	 John
+👉 Problem:
+“AWS + John” repeated 😓
+Waste of space
+Hard to update
+
+✅ After Normalization
+Table 1: students
+id	name	  course_id
+1	Rahul	    1
+2	Amit.     2
+3	Neha	    1
+
+Table 2: courses
+course_id	course 	instructor
+1	             AWS	            John
+2	             Linux	            Mike
+
+👉 Now:
+No repetition
+Clean structure
+Easy updates
+
+📘 Types of Normalization (Important Levels)
+1 First Normal Form (1NF)
+👉 Rule:
+No multiple values in one column
+Each field = single value
+
+❌ Wrong
+name	courses
+Rahul	AWS, Linux
+
+✅ Correct
+name	course
+Rahul	AWS
+Rahul	Linux
+
+2 Second Normal Form (2NF)
+👉 Rule:
+Must be in 1NF
+No partial dependency
+
+🧠 Simple Meaning
+👉 Every column should depend on full primary key
+
+❌ Wrong
+student_id	   course 	instructor
+1	                AWS             John
+👉 instructor depends only on course ❌
+
+✅ Fix
+Split into:
+students table
+courses table
+
+3️⃣ Third Normal Form (3NF)
+👉 Rule:
+Must be in 2NF
+No indirect dependency
+
+🧠 Simple Meaning
+👉 Column should depend only on primary key
+
+❌ Wrong
+student_id	course_id	instructor
+
+👉 instructor depends on course_id ❌
+
+✅ Fix
+Move instructor to course table
+
+🧠 Easy Way to Remember
+1NF → No multi-values
+2NF → No partial dependency
+3NF → No indirect dependency
+
+🔥 Real-Life Example
+👉 E-commerce system:
+Before: | order_id | customer | product | price |
+
+After:
+customers table
+products table
+orders table
+👉 Clean + scalable system
+
+⚖️ Advantages
+✅ Less duplicate data
+✅ Easy updates
+✅ Better performance (in some cases)
+✅ Data consistency
+
+⚠️ Disadvantages
+❌ Too many tables
+❌ Complex JOINs
+👉 That’s why sometimes we use denormalization
+---
+🎯 Interview Questions
+1. What is normalization?
+2. Explain 1NF, 2NF, 3NF
+3. What is partial dependency?
+4. What is transitive dependency?
+5. Normalization vs denormalization
+---
+🧪 Practice Questions
+1. Convert table to 1NF
+2. Identify partial dependency
+3. Split table into 2NF
+4. Remove transitive dependency
+5. Design student-course database
+---
+💡 Final Summary
+Normalization → Clean database design
+1NF → Atomic values
+2NF → Full dependency
+3NF → No indirect dependency
+---
+🚀 Pro Tip
+👉 In real projects:
+OLTP systems → Normalized
+Analytics systems → Sometimes denormalized
