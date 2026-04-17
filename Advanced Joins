@@ -1,0 +1,147 @@
+Advanced Joins
+🧠 What are Advanced JOINs?
+👉 When basic JOIN is not enough, we use:
+SELF JOIN
+FULL OUTER JOIN
+CROSS JOIN
+Multiple JOINs
+Anti JOIN (very important 🔥)
+---
+1️⃣ SELF JOIN (Table joins with itself)
+👉 Used when data is related within same table
+🔹 Example: Employees & Managers
+Table: employees
+id	name	manager_id
+1	Rahul 	   NULL
+2	Amit	   1
+3	Neha	   1
+🔹 Query
+SELECT e.name AS employee, m.name AS manager
+FROM employees e
+LEFT JOIN employees m
+ON e.manager_id = m.id;
+🔹 Output
+employee	manager
+Rahul	NULL
+Amit	Rahul
+Neha	Rahul
+
+🧠 Easy Meaning
+👉 “Same table, different roles”
+---
+2️⃣ FULL OUTER JOIN
+👉 Returns all data from both tables
+
+🔹 Query
+SELECT s.name, c.course
+FROM students s
+FULL OUTER JOIN courses c
+ON s.id = c.student_id;
+
+🔹 Output
+name	course
+Rahul	AWS
+Amit	Linux
+Neha	NULL
+NULL	DevOps
+
+⚠️ Note
+👉 Not supported in some DBs like MySQL directly
+(Use UNION workaround)
+---
+3️⃣ CROSS JOIN (Cartesian Product)
+👉 Combines every row with every row
+
+🔹 Query
+SELECT s.name, c.course
+FROM students s
+CROSS JOIN courses c;
+
+🔹 Output (3 × 3 = 9 rows)
+name	course
+Rahul	AWS
+Rahul	Linux
+Rahul	DevOps
+Amit	AWS
+
+🧠 Use Case
+All combinations (product + size)
+Testing data
+---
+4️⃣ Multiple JOINs (Real-world 🔥)
+👉 Join more than 2 tables
+🔹 Example
+SELECT o.order_id, c.name, p.product_name
+FROM orders o
+JOIN customers c ON o.customer_id = c.id
+JOIN products p ON o.product_id = p.id;
+
+🧠 Used in:
+E-commerce systems
+Banking
+Analytics
+---
+5️⃣ ANTI JOIN (Very Important 🔥🔥)
+👉 Find data NOT present in another table
+
+🔹 Example: Students without courses
+SELECT s.name
+FROM students s
+LEFT JOIN courses c
+ON s.id = c.student_id
+WHERE c.student_id IS NULL;
+
+🔹 Output
+name
+Neha
+
+🧠 Easy Meaning
+👉 “Give me records with no match”
+---
+6️⃣ SELF JOIN vs NORMAL JOIN
+Feature	SELF JOIN	NORMAL JOIN
+Tables  	 Same	              Different
+Use	             Hierarchy	  Relationships
+
+⚠️ Common Mistakes
+❌ Missing alias in SELF JOIN
+FROM employees JOIN employees
+👉 ❌ Confusing / error
+
+❌ Wrong JOIN condition
+ON id = id
+👉 ❌ Wrong results
+
+🧠 Real-Life Scenarios
+Employee → Manager hierarchy
+Customers without orders
+Products never sold
+Multi-table reporting
+---
+🎯 Interview Questions
+1. What is SELF JOIN?
+2. What is CROSS JOIN?
+3. Difference between INNER and OUTER JOIN
+4. How to find unmatched records?
+5. What is Cartesian product?
+
+---
+🧪 Practice Questions
+Try these:
+1. Find employees with their managers
+2. Find students without courses
+3. Show all possible combinations of students & courses
+4. Join 3 tables (orders + users + products)
+5. Find products never ordered
+
+---
+💡 Final Summary
+SELF JOIN → Same table relationship
+FULL JOIN → All data
+CROSS JOIN → All combinations
+MULTI JOIN → Real-world queries
+ANTI JOIN → Find missing data (very important)
+---
+🚀 Pro Tip
+👉 In interviews:
+ANTI JOIN + SELF JOIN = High chance questions 
