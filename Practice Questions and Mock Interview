@@ -1,0 +1,138 @@
+1. Practice questions (with increasing difficulty)
+2. Mock interview (real questions + answers)
+3. Mini challenge
+🧪 PART 1: Practice Questions (Hands-on)
+Use this sample table:
+employees (
+  id INT,
+  name VARCHAR(50),
+  dept VARCHAR(50),
+  salary INT
+)
+---
+🔹 Level 1 (Basic)
+1. Show all employees
+SELECT * FROM employees;
+2. Show only name and salary
+3. Find employees with salary > 50000
+4. Sort employees by salary (highest first)
+5. Show top 3 highest paid employees
+---
+🔹 Level 2 (Intermediate)
+6. Count employees in each department
+7. Find average salary per department
+8. Show departments having more than 2 employees
+9. Find highest salary
+10. Find employees earning above average salary
+---
+🔹 Level 3 (JOIN + Subquery)
+Assume another table:
+departments (
+  dept VARCHAR(50),
+  location VARCHAR(50)
+)
+11. Join employees with departments
+12. Find employees working in “IT” location
+13. Find employees not assigned to any department
+14. Find department with highest average salary
+---
+🔹 Level 4 (Advanced 🔥)
+15. Rank employees by salary
+16. Find top 2 employees per department
+17. Find employees earning more than their department average
+18. Find duplicate salaries
+19. Running total of salaries
+---
+🎯 PART 2: Mock Interview (Real Questions)
+I’ll act like interviewer 👇
+---
+❓ Q1: What is SQL?
+👉 Answer: SQL is used to store, retrieve, and manage data in databases.
+---
+❓ Q2: Difference between WHERE and HAVING?
+👉 Answer:
+WHERE → filters rows before grouping
+HAVING → filters after GROUP BY
+---
+❓ Q3: INNER JOIN vs LEFT JOIN?
+👉 Answer:
+INNER JOIN → only matching rows
+LEFT JOIN → all left + matching right
+---
+❓ Q4: What is INDEX?
+👉 Answer: Index improves query performance by speeding up data retrieval.
+---
+❓ Q5: What is normalization?
+👉 Answer: Process of organizing data to remove redundancy and improve structure
+---
+❓ Q6: What is a transaction?
+👉 Answer: Group of queries executed together (COMMIT / ROLLBACK)
+---
+❓ Q7: ROW_NUMBER vs RANK?
+👉 Answer:
+ROW_NUMBER → unique numbers
+RANK → same rank for same values (skips numbers)
+---
+❓ Q8: What is a subquery?
+👉 Answer: Query inside another query
+---
+❓ Q9: What is a view?
+👉 Answer: Virtual table (stored query)
+---
+❓ Q10: What is GROUP BY?
+👉 Answer: Used to group rows and apply aggregate functions
+---
+🧠 PART 3: Real Scenario Questions (Very Important 🔥)
+---
+🔹 Scenario 1: Top Salary per Department
+👉 Expected:
+SELECT *
+FROM (
+  SELECT name, dept, salary,
+  ROW_NUMBER() OVER (PARTITION BY dept ORDER BY salary DESC) AS rn
+  FROM employees
+) t
+WHERE rn = 1;
+---
+🔹 Scenario 2: Employees Without Department
+SELECT e.name
+FROM employees e
+LEFT JOIN departments d
+ON e.dept = d.dept
+WHERE d.dept IS NULL;
+---
+🔹 Scenario 3: Above Average Salary
+SELECT name
+FROM employees
+WHERE salary > (SELECT AVG(salary) FROM employees);
+---
+⚡ PART 4: Mini Challenge (Try Yourself)
+👉 Question:
+Find top 3 highest salaries per department
+👉 Try yourself first ⚠️
+---
+✅ Answer
+SELECT *
+FROM (
+  SELECT name, dept, salary,
+  ROW_NUMBER() OVER (PARTITION BY dept ORDER BY salary DESC) AS rn
+  FROM employees
+) t
+WHERE rn <= 3;
+---
+🚀 FINAL INTERVIEW TIPS
+👉 Focus on:
+JOIN
+GROUP BY
+Window Functions 🔥
+Subqueries
+👉 Practice daily on:
+LeetCode
+HackerRank
+---
+💡 Honest Advice
+If you can solve:
+Top N per group
+Above average problems
+JOIN scenarios
+
