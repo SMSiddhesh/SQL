@@ -1,0 +1,138 @@
+Indexes and Constraints
+🧠 1. INDEX (Speed Booster ⚡)
+👉 Index = shortcut to find data faster
+Think:
+> Without index → scan whole table (slow)
+With index → jump directly to data (fast)
+📚 Like a book index page
+---
+🔹 Example
+Table: students
+id	name	age
+1	Rahul	22
+2	Amit	19
+...	...	...
+
+🔹 Without Index
+SELECT * FROM students WHERE name = 'Rahul';
+👉 Database checks every row 😴
+
+🔹 Create Index
+CREATE INDEX idx_name ON students(name);
+
+🔹 With Index
+👉 Now DB directly finds “Rahul” ⚡
+
+🧠 When to Use Index?
+✅ Frequently searched columns
+name
+email
+id
+foreign keys
+
+⚠️ When NOT to Use
+❌ Small tables
+❌ Columns with many duplicate values
+❌ Too many indexes (slows INSERT/UPDATE)
+
+🔹 Types of Index (Basic)
+Single Column Index
+Composite Index
+CREATE INDEX idx_name_age ON students(name, age);
+
+⚠️ Important Note
+👉 Index improves:
+SELECT 🔥
+👉 But slows:
+INSERT
+UPDATE
+DELETE
+---
+🧠 2. CONSTRAINTS (Data Rules 🔒)
+👉 Constraints = Rules applied on table
+👉 They ensure:
+Data is correct
+No garbage data
+
+🔹 Types of Constraints
+1️⃣ PRIMARY KEY
+👉 Unique + NOT NULL
+CREATE TABLE students (
+  id INT PRIMARY KEY,
+  name VARCHAR(50)
+);
+👉 No duplicate IDs
+
+2️⃣ FOREIGN KEY
+👉 Connects two tables
+CREATE TABLE orders (
+  id INT,
+  student_id INT,
+  FOREIGN KEY (student_id) REFERENCES students(id)
+);
+👉 Ensures valid relationship
+
+3️⃣ UNIQUE
+👉 No duplicate values
+email VARCHAR(100) UNIQUE
+
+4️⃣ NOT NULL
+👉 Cannot be empty
+name VARCHAR(50) NOT NULL
+
+5️⃣ CHECK
+👉 Apply condition
+age INT CHECK (age >= 18)
+
+6️⃣ DEFAULT
+👉 Set default value
+status VARCHAR(20) DEFAULT 'active'
+
+🧠 Real-Life Example
+👉 User signup system:
+CREATE TABLE users (
+  id INT PRIMARY KEY,
+  email VARCHAR(100) UNIQUE,
+  age INT CHECK (age >= 18),
+  status VARCHAR(20) DEFAULT 'active'
+);
+
+🔥 Index vs Constraint (Important)
+Feature	Index	Constraint
+Purpose	Speed	Data safety
+Affects	Performance	Data validity
+Example	Search fast	No duplicate
+
+⚠️ Common Mistakes
+❌ Too many indexes
+👉 Slows database
+
+❌ No constraints
+👉 Garbage data enters system
+---
+🎯 Interview Questions
+1. What is an index?
+2. How does index improve performance?
+3. What is primary key vs unique?
+4. What is foreign key?
+5. Can we have multiple indexes?
+6. Why index slows INSERT?
+---
+🧪 Practice Questions
+1. Create table with primary key
+2. Add unique email column
+3. Add check constraint (age > 18)
+4. Create index on name
+5. Create foreign key between tables
+---
+💡 Final Summary
+Index → Faster queries
+Constraints → Safe & correct data
+---
+🚀 Pro Tip (Very Important)
+👉 In real companies:
+Index used for performance tuning
+Constraints used for data integrity
+👉 Interview combo question:
+> “How to make DB fast + safe?”
+Answer: 👉 Use Index + Constraints
