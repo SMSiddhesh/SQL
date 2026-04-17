@@ -1,0 +1,111 @@
+Transactions
+ Transactions = safe execution of multiple queries
+This is used in banking, payments, orders, etc.
+🧠 What is a Transaction?
+👉 A transaction = group of SQL operations executed together
+👉 Either:
+✅ All succeed
+❌ Or all fail
+
+💡 Real-Life Example (Best Way to Understand)
+👉 Bank transfer:
+Deduct ₹100 from Account A
+Add ₹100 to Account B
+If one fails → money should NOT disappear ❌
+👉 That’s why we use transactions
+
+🔄 Basic Syntax
+BEGIN;
+UPDATE accounts SET balance = balance - 100 WHERE id = 1;
+UPDATE accounts SET balance = balance + 100 WHERE id = 2;
+COMMIT;
+
+🧠 Key Commands
+1 BEGIN / START TRANSACTION
+👉 Starts transaction
+BEGIN;
+
+2 COMMIT
+👉 Save changes permanently ✅
+COMMIT;
+
+3 ROLLBACK
+👉 Undo all changes ❌
+ROLLBACK;
+
+🔥 Example with Error
+BEGIN;
+UPDATE accounts SET balance = balance - 100 WHERE id = 1;
+-- Error happens here
+ROLLBACK;
+👉 Result:
+No money deducted
+System stays safe 👍
+
+🧠 ACID Properties (Very Important 🔥🔥)
+Transactions follow ACID rules
+
+🔹 A – Atomicity
+👉 “All or nothing”
+
+🔹 C – Consistency
+👉 Data remains correct
+
+🔹 I – Isolation
+👉 Transactions don’t disturb each other
+
+🔹 D – Durability
+👉 Once committed → data is saved forever
+
+🔥 Isolation Levels (Interview Level)
+👉 Control how transactions interact
+READ UNCOMMITTED
+READ COMMITTED
+REPEATABLE READ
+SERIALIZABLE
+👉 Higher level = more safety but slower
+
+⚠️ Common Problems (Important)
+
+🔹 Dirty Read
+👉 Reading uncommitted data
+
+🔹 Non-repeatable Read
+👉 Data changes during transaction
+
+🔹 Phantom Read
+👉 New rows appear during transaction
+
+🧠 Real-Life Use Cases
+Banking transactions 💰
+E-commerce orders 🛒
+Ticket booking 🎟️
+Payment systems
+---
+🎯 Interview Questions
+1. What is a transaction?
+2. What is COMMIT vs ROLLBACK?
+3. Explain ACID properties
+4. What is isolation level?
+5. What is dirty read?
+---
+🧪 Practice Questions
+1. Write money transfer query
+2. Use rollback on error
+3. Simulate transaction failure
+4. Explain ACID with example
+---
+💡 Final Summary
+Transaction → group of queries
+COMMIT → save changes
+ROLLBACK → undo changes
+ACID → ensures safety
+---
+🚀 Pro Tip (Very Important)
+👉 In real jobs:
+Always use transactions for critical operations
+Especially:
+Money
+Orders
+Inventory
+
