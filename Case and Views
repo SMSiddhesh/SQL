@@ -1,0 +1,153 @@
+CASE + Views
+🧠 1. CASE (Conditional Logic in SQL)
+👉 CASE = “IF–ELSE in SQL”
+You use it when you want to:
+Categorize data
+Apply conditions inside a query
+Create new columns based on logic
+
+🔹 Basic Syntax
+SELECT column,
+CASE
+  WHEN condition THEN result
+  WHEN condition THEN result
+  ELSE result
+END AS new_column
+FROM table;
+
+📘 Example Table: students
+name	marks
+Rahul	80
+Amit	45
+Neha	90
+Ravi	30
+
+🔹 Example 1: Pass / Fail
+SELECT name,
+CASE
+  WHEN marks >= 50 THEN 'Pass'
+  ELSE 'Fail'
+END AS result
+FROM students;
+👉 Output:
+name	result
+Rahul	Pass
+Amit	Fail
+Neha	Pass
+Ravi	Fail
+
+🔹 Example 2: Grade System
+SELECT name,
+CASE
+  WHEN marks >= 80 THEN 'A'
+  WHEN marks >= 60 THEN 'B'
+  WHEN marks >= 40 THEN 'C'
+  ELSE 'Fail'
+END AS grade
+FROM students;
+
+🔹 Example 3: Use CASE with Aggregate
+👉 Count pass/fail students
+SELECT
+SUM(CASE WHEN marks >= 50 THEN 1 ELSE 0 END) AS pass_count,
+SUM(CASE WHEN marks < 50 THEN 1 ELSE 0 END) AS fail_count
+FROM students;
+
+🔹 Example 4: CASE in ORDER BY
+SELECT name, marks
+FROM students
+ORDER BY 
+CASE 
+  WHEN marks >= 80 THEN 1
+  WHEN marks >= 50 THEN 2
+  ELSE 3
+END;
+
+🧠 Real-Life Use
+Salary category (High / Medium / Low)
+Order status (Pending / Completed)
+Risk level (Low / Medium / High)
+
+⚠️ Common Mistake
+❌ Missing END:
+CASE WHEN marks > 50 THEN 'Pass'
+👉 ❌ Error
+
+💡 Tip
+👉 Always give alias:
+END AS result
+---
+🧠 2. Views (Virtual Tables)
+👉 View = Saved query (virtual table)
+It does NOT store data
+👉 It stores the query only
+
+🔹 Why use Views?
+Simplify complex queries
+Security (hide columns)
+Reuse queries
+
+🔹 Create View
+CREATE VIEW student_view AS
+SELECT name, marks FROM students;
+
+🔹 Use View
+SELECT * FROM student_view;
+👉 Looks like a table but it’s not
+
+🔹 Example: Complex View
+CREATE VIEW high_scorers AS
+SELECT name, marks
+FROM students
+WHERE marks > 70;
+
+🔹 Drop View
+DROP VIEW student_view;
+
+🧠 Real-Life Use
+Show only required data to users
+Hide sensitive data (salary, passwords)
+Simplify dashboards
+
+🔥 View vs Table
+Feature	View	     Table
+Stores data	❌ No        ✅ Yes
+Speed	             Slower      Faster
+Use	             Logic	      Storage
+
+⚠️ Important Notes
+Changes in table → reflect in view
+Views can be nested
+Some views are not updatable
+
+🔥 Combined Example (CASE + View)
+CREATE VIEW student_result AS
+SELECT name,
+CASE
+  WHEN marks >= 50 THEN 'Pass'
+  ELSE 'Fail'
+END AS result
+FROM students;
+---
+🎯 Interview Questions
+1. What is CASE in SQL?
+2. Difference between CASE and IF
+3. What is a View?
+4. Difference between View and Table
+5. Can we update a view?
+---
+🧪 Practice Questions
+1. Create grade system using CASE
+2. Count pass/fail students
+3. Create view for top students
+4. Show only failed students using view
+5. Create salary category (High/Low)
+---
+💡 Final Summary
+CASE → Conditional logic (IF-ELSE)
+View → Saved query (virtual table)
+---
+🚀 Pro Tip
+👉 In real jobs:
+CASE is used in reports & dashboards
+Views are used in BI tools and APIs
